@@ -14,11 +14,12 @@ Tópicos que serão abordados:
 - Context API;
 - Hooks do React (useState, useEffect, useRef e todos os outros hooks);
 - Redux;
+- comando para criar projeto react: npx create-react-app react
 ---
 ## 💻 Instalação
-- Comando para criação de projeto react:
+- Dentro da respectiva pasta, executar o comando:
 ```
-npx create-react-app react
+npm install
 ```
 ## 💻 Execução
 - Na raiz do projeto, executar o comando:
