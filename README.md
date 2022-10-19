@@ -16,7 +16,7 @@ Tópicos que serão abordados:
 - Redux;
 ---
 ## 💻 Instalação
-- Comando para instalação do projeto no terminal:
+- Comando para criação de projeto react:
 ```
 npx create-react-app react
 ```
