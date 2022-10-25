@@ -1,0 +1,6 @@
+.my_list {
+    list-style: none;
+    color: rgb(43, 46, 226);
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
