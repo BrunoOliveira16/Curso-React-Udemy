@@ -265,6 +265,8 @@ export default App;
 
 Exemplo: No componente deve se colocar o parâmetro na função e chamar o valor com a sintaxe abaixo
 ```
+import React from 'react';
+
 const ShowUserName = (props) => {
     return (
          <div className="App">
@@ -279,16 +281,194 @@ export default ShowUserName;
 <br>
 
 ## ✅ Destructuring em props
+- É super comum passar mais de uma prop em um componente;
+- Para facilitar isso o react nos permite desestruturar as propriedades que chegam, com o recurso de destructuring;
+- Se temos duas props: name e age;
+- Podemos fazer assim ```function MyComponent({name, age})```
+- Agora não precisamos mais utilizar props.algumaCoisa;
 
+Exemplo:
+```
+import CarDetails from './components/CarDetails';
+
+function App () {
+    return {
+        <div className="App">
+            <CarDetails brand="VW" km={10000} color="prata" />
+        </div>
+    }
+}
+
+export default App;
+```
+
+```
+import React from 'react';
+
+const CarDetails = ({ brand, km, color }) => {
+    return <div>
+        <h2>Detalhes do Carro</h2>
+        <ul>
+            <li>Marca: {brand}</li>
+            <li>KM: {km}</li>
+            <li>cor: {color}</li>
+        </ul>
+    </div>
+}
+
+export default CarDetails;
+```
 
 <br>
 
 ## ✅ Reaproveitamento de componentes
+- Com props a reutilização de componentes começa a fazer muito sentido;
+- Se temos os dados de 1000 carros por exemplo, podemos reaproveitar o nosso CarDetails 1000 vezes;
+- Isso torna nosso código mais padronizado, facilitando a manutenção;
 
+Exemplo:
+```
+import CarDetails from './components/CarDetails';
+
+function App () {
+    return {
+        <div className="App">
+            <CarDetails brand="VW" km={10000} color="prata" newCar={false}/>
+            <CarDetails brand="GM" km={20000} color="preto" newCar={true}/>
+            <CarDetails brand="Fiat" km={30000} color="vermelho" newCar={false}/>
+        </div>
+    }
+}
+
+export default App;
+```
+
+```
+import React from 'react';
+
+const CarDetails = ({ brand, km, color, newCar }) => {
+    return <div>
+        <h2>Detalhes do Carro</h2>
+        <ul>
+            <li>Marca: {brand}</li>
+            <li>KM: {km}</li>
+            <li>cor: {color}</li>
+        </ul>
+        {newCar && <p>Esse carro é novo!</p>}
+    </div>
+}
+
+export default CarDetails;
+```
 
 <br>
 
 ## ✅ Renderização de lista em componente
+- Os arrays de dados podem ter muitos itens também;
+- Então o correto é utilizar uma estrutura de loop(map) para a sua exibição;
+- E com isso conseguimos conciliar os três conceitos: renderização de listas, reaproveitamento de componentes e props;
 
+Exemplo: Vamos utilizar o mesmo componente do exemplo anterior carDetails.
+
+```
+import CarDetails from './components/CarDetails';
+
+function App () {
+    const cars = [
+        {brand="VW" km=10000 color="prata" newCar=false},
+        {brand="GM" km=20000 color="preto" newCar=true},
+        {brand="Fiat" km=30000 color="vermelho" newCar=false}
+    ]
+
+    return {
+        <div className="App">
+            {cars.map((car) => (
+                <CarDetails 
+                    brand={car.brand}
+                    km={car.km} 
+                    color={car.color} 
+                    newCar={car.newCar}
+                />
+            ))}
+        </div>
+    }
+}
+
+export default App;
+```
 
 <br>
+
+## ✅ React Fragments
+- Os reacts fragments são interessantes para quando precisamos ter mais de um elemento pai em um componente;
+- Criamos uma tag vazia: ```<>...</>```
+- E ela serve como elemento pai, não alterando a estrutura do HTML com uma div, por exemplo;
+
+Exemplo:
+```
+const Fragment = () => {
+    return (
+        <>
+            <h1>Primeiro Título</h1>
+            <h2>Segundo Título</h2>
+        </>
+    );
+};
+
+export default Fragment;
+```
+
+<br>
+
+## ✅ A prop Children
+- Children prop é um recurso utilizado para quando um componente precisa ter JSX dentro dele;
+- Porém este JSX vem do componente pai;
+- Então o componente age como um container, abraçando estes elementos;
+- E children é considerada uma prop do componente;
+
+Exemplo:
+```
+const Container = ({ children, myValue }) => {
+    return (
+        <div>
+            <h2>Este é o título do container</h2>
+            {children}
+            <p>O valor é: {myValue}</p>
+        </div>
+    );
+};
+
+export default Container;
+```
+Dentro do arquipo app
+```
+import Container from './components/Container';
+
+function App () {
+    return {
+        <div className="App" myValue="testing">
+            <Container>
+                <p>Esse é o conteúdo</p>
+            </Container>
+        </div>
+    }
+}
+
+export default App;
+```
+
+<br>
+
+## ✅ Função como prop
+- As funções podem ser passadas para as props normalmente;
+- Basta criar a função no componente pai e enviar como prop para o componente;
+- No componente filho ela pode ser ativada por um evento, por exemplo;
+
+Exemplo:
+```
+
+```
+
+<br>
+
+## ✅ State lift
