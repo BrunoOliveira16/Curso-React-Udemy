@@ -375,15 +375,16 @@ import CarDetails from './components/CarDetails';
 
 function App () {
     const cars = [
-        {brand="VW" km=10000 color="prata" newCar=false},
-        {brand="GM" km=20000 color="preto" newCar=true},
-        {brand="Fiat" km=30000 color="vermelho" newCar=false}
-    ]
+        {id=1, brand="VW", km=10000, color="prata", newCar=false},
+        {id=2, brand="GM", km=20000, color="preto", newCar=true},
+        {id=3, brand="Fiat", km=30000, color="vermelho", newCar=false}
+    ];
 
     return {
         <div className="App">
             {cars.map((car) => (
                 <CarDetails 
+                    key={car.id}
                     brand={car.brand}
                     km={car.km} 
                     color={car.color} 
@@ -391,8 +392,8 @@ function App () {
                 />
             ))}
         </div>
-    }
-}
+    };
+};
 
 export default App;
 ```
@@ -466,9 +467,90 @@ export default App;
 
 Exemplo:
 ```
+import ExecuteFunction from './components/ExecuteFunction'
 
+function App () {
+    function showMessage () {
+        console.log("Evento do componente pai!");
+    }
+
+    return (
+        <div className="App">
+            <ExecuteFunction myFunction={showMessage} />
+        </div>
+    )
+}
+export default App;
+```
+Código do componente:
+```
+const ExecuteFunction = ({ myFunction }) => {
+    return (
+        <div>
+            <button onClick={myFunction}>Clique aqui para executar a função</button>
+        </div>
+    );
+};
+
+export default ExecuteFunction;
 ```
 
 <br>
 
 ## ✅ State lift
+- Elevação de state ou State lift é quando um valor é elevado do componente filho para o componente pai;
+- Geralmente temos um componente que usa o state e outro que o altera;
+- Então precisamos passar a alteração para o componente pai, e este passa para o componente que usa o state;
+
+Exemplo:
+```
+import Message from './components/Message';
+import ChangeMessageState from './components/ChangeMessageState';
+
+function App () {
+    return (
+        const [message, setMessage] = useState("");
+
+        const handleMessage = (msg) => {
+            setMessage(msg);
+        };
+
+        <div className="App">
+            <Message msg={ message }/>
+            <ChangeMessageState handleMessage={ handleMessage }/>
+        </div>
+    );
+};
+
+export default App;
+```
+
+Componente para exibir a mensagem armazenada no useState
+```
+const Message = ({ msg }) => {
+    return (
+        <div>
+            A mensagem é: {msg}
+        </div>
+    );
+};
+
+export default Message;
+```
+
+Componente para alterar o estado do useState, consumindo um array apartir de um evento de click, onde cada botão é referente ao indice de um determinado objeto dentro do array.
+```
+const ChangeMessageState = ({ handleMessage }) => {
+    const messages = ["Oi", "Olá", "Olá, tudo bem?"];
+
+    return (
+        <div>
+            <button onClick={() => handleMessage(messages[0])}>1</ button>
+            <button onClick={() => handleMessage(messages[1])}>2</ button>
+            <button onClick={() => handleMessage(messages[2])}>3</ button>
+        </div>
+    );
+};
+
+export default ChangeMessageState;
+```
