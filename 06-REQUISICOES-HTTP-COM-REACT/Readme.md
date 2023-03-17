@@ -241,12 +241,31 @@ Após a criação do form, iremos criar a função para enviar os dados, e utili
 <br> 
 
 ## ✅ Carregamento de dados dinâmico
+- Se a requisição foi feita com sucesso, podemos adicionar o item a lista após o request;
+- Isso torna nossa aplicação mais performática;
+- Utilizaremos o set do useState para isso;
 
+Para adicionar o carregamento dinâmico após o envio de dados, adicionamos dentro da função handleSubmit o state de Products e pegamos os dados antigos e criando um novo array com o novo produto, adicionado através de um novo objeto javascipt addedProduct que de forma indireta utilizamos o res.json().
+
+No final criamos um reset para os states de name e price.
+```
+const addedProduct = await res.json();
+
+setProducts((prevProducts) => [...prevProducts, addedProduct]);
+
+//Resetando os states
+setName("");
+setPrice("");
+```
 
 <br> 
 
 ## ✅ Custom hook para resgate de dados
-
+- É normal dividir funções que podem ser reaproveitadas em hooks;
+- Esta técnica é chamada de custom hook, e vamos criar um para o resgate de dados;
+- Os hooks geralmente ficam na pasta hooks;
+- Devemos utilizar o padrão ```useName```;
+- Basicamente criamos uma função e exportamos ela;
 
 <br> 
 

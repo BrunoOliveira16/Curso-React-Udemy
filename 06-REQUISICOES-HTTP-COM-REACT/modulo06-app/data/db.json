@@ -16,19 +16,14 @@
       "price": 29.9
     },
     {
-      "name": "teste",
-      "price": "15",
+      "name": "Capa de Chuva",
+      "price": "59.99",
       "id": 4
     },
     {
-      "name": "Capa de Chuva",
-      "price": "59.99",
+      "name": "Camiseta Azul",
+      "price": "19.99",
       "id": 5
-    },
-    {
-      "name": "Capa de Chuva",
-      "price": "59.99",
-      "id": 6
     }
   ]
 }

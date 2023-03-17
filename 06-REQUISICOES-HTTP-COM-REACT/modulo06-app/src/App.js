@@ -38,9 +38,15 @@ function App() {
       },
       body: JSON.stringify(product),
     });
-    
-  };
 
+    //Carregamento dinâmico
+    const addedProduct = await res.json();
+    setProducts((prevProducts) => [...prevProducts, addedProduct]);
+
+    //Resetando os states
+    setName("");
+    setPrice("");
+  };
 
   return (
     <div className="App">
