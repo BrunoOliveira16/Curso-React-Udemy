@@ -24,6 +24,51 @@
       "name": "Camiseta Azul",
       "price": "19.99",
       "id": 5
+    },
+    {
+      "name": "Calça Jeans",
+      "price": "99.99",
+      "id": 6
+    },
+    {
+      "name": "Blusa",
+      "price": "19.99",
+      "id": 7
+    },
+    {
+      "name": "Boné Amarelo",
+      "price": "30.99",
+      "id": 8
+    },
+    {
+      "name": "Boné Amarelo",
+      "price": "30.99",
+      "id": 9
+    },
+    {
+      "name": "Blusa Verde M",
+      "price": "29.99",
+      "id": 10
+    },
+    {
+      "name": "Blusa Verde M",
+      "price": "29.99",
+      "id": 11
+    },
+    {
+      "name": "Blusa Verde M",
+      "price": "29.99",
+      "id": 12
+    },
+    {
+      "name": "Boné Preto",
+      "price": "19.99",
+      "id": 13
+    },
+    {
+      "name": "Calça Preta",
+      "price": "99.99",
+      "id": 14
     }
   ]
 }

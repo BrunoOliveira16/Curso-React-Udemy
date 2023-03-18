@@ -267,19 +267,419 @@ setPrice("");
 - Devemos utilizar o padrão ```useName```;
 - Basicamente criamos uma função e exportamos ela;
 
+Primeiro deve-se criar uma pasta chamada hooks dentro de src e dentro dessa pasta, vamos criar o arquivo useFetch.js.
+
+Dentro do arquivo useFetch.js, precisamos importar o useState e useEffect, e criamos nossa função useFetch exportando ela e com a url como parâmetro
+```
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+    //TODO
+}
+```
+
+Após a criação da função, vamos criar um state para os dados que serão recebidos, seu estado inicial será null:
+```
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+}
+```
+
+Agora iremos criar um useEffect, pois desejamos que essa função faça essa requisição uma única vez e colocamos como depêndecia a url, para se caso a url mudar a função ser carregada novamente.
+```
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+
+    }, [url];)
+};
+```
+
+Dentro do useEffect, precisamos criar nosso requesição assíncrona para buscar os dados da url, com o padrão fetch:
+```
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+
+      const fetchData = async () => {
+
+      }
+    }, [url];)
+};
+```
+Agora iremos realizar um a request para nossa url, e criamos uma const para receber os dados do tipo json e setamos o setData com esses dados.
+```
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+
+      const fetchData = async () => {
+
+        const res = await fetch(url);
+
+        const json = await res.json();
+
+        setData(json);
+
+      }
+    }, [url];)
+};
+```
+Por final iremos dar o retorno da nossa função fetchData e retornaremos também nossos dados.
+```
+import { useState, useEffect } from 'react';
+
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+
+      const fetchData = async () => {
+
+        const res = await fetch(url);
+
+        const json = await res.json();
+
+        setData(json);
+
+      }
+
+      fetchData();
+    }, [url];)
+
+    return { data };
+};
+```
+
+Agora em App.js iremos importar nosso useFetch e comentar nosso useEffect anteriormente criado:
+```
+import { useFetch } from './hooks/useFetch';
+
+//useEffect(() => {
+  //  async function fetchData() {
+  //    const res = await fetch(url);
+
+  //    const data = await res.json();
+  
+  //    setProducts(data);
+  //  }
+    
+  //  fetchData();
+
+  //}, []);
+
+```
+
+Criamos uma const para nossos dados, utilizando o nosso hook useFetch e renomearemos o data para items:
+```
+const { data: items } = useFetch(url);
+```
+
+Agora no nosso map, iremos substituir products por items e validamos o map para carregar somente quando tiver dados:
+```
+ <ul>
+    {items && items.map((product) => (
+      <li key={product.id}>{product.name} - R$ {product.price}</li>
+    ))}
+  </ul>
+```
+
 <br> 
 
 ## ✅ Refatorando o POST
+- Podemos utilizar o mesmo hook para incluir uma etapa de POST;
+- Vamos criar um novo useEffect que mapeia uma outra mudança de estado;
+- Após ela ocorrer executamos a adição de produto;
+- OBS: nem sempre reutilizar um hook é a melhor estratégia;
 
+O primeiro passo para refatorar o hook, será criando os states abaixo (config, method e callFetch). O ```config``` irá configurar os headers e body, o ```method``` irá dizer qual será o método POS, GET etc e o ```callFetch``` que será utilizado como depêndencia do useEffect para sempre que houver uma alteração ele enviara os dados novamente.
+```
+const [config, setConfig] = useState(null);
+const [method, setMethod] = useState(null);
+const [callFetch, setCallFetch] = useState(false);
+```
+Agora iremos criar um novo useEffect para mapear as config, para quando houver uma alteração na config, chamarmos o useEffect, com isso iremos criar uma nova função chamada de httpRequest e fazemos um check com if para verificar se caso o method for POST, iremos realizar um apanhado das configurações da url e inserir em callFetch.
+```
+useEffect(() => {
+
+  const fetchData = async () => {
+      const res = await fetch(url);
+
+      const json = await res.json();
+
+      setData(json);
+  };
+
+  fetchData();
+}, [url, callFetch]);
+
+useEffect(() => {
+
+  const httpRequest = async () => {
+      if(method === "POST") {
+          let fetchOptions = [url, config];
+
+          const res = await fetch(...fetchOptions);
+
+          const json = await res.json();
+
+          setCallFetch(json);
+      };
+  };
+    
+  httpRequest();
+
+}, [config, method, url]);
+
+return { data, httpConfig };
+```
+Agora iremos criar uma função para realizar a configuração e não precisar configurar o state config no componente, com isso iremos criar a httpConfig e ela ira receber os dados de envio e método da requisição e no final ira setar setMethod. Agora iremos exportar a função no nosso return.
+```
+const httpConfig = (data, method) => {
+  if(method === "POST") {
+      setConfig({
+          method,
+          headers: {
+              "Content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+      });
+
+      setMethod(method);
+  };
+};
+
+return { data, httpConfig };
+```
+
+Em App.js podemos comentar o código  de ```res``` e chamar o httpConfig com os parâmetros de product e POST
+
+```
+ //const res = await fetch(url, {
+    //  method: "POST",
+    //  headers: {
+    //    "Content-Type": "application/json",
+    //  },
+    //  body: JSON.stringify(product),
+    //});
+
+    //Carregamento dinâmico
+    //const addedProduct = await res.json();
+    //setProducts((prevProducts) => [...prevProducts, addedProduct]);
+
+    //Resetando os states
+    httpConfig(product, "POST");
+```
 
 <br> 
 
 ## ✅ Estado de Loading
+- Quando fizermos requisições para APIs é normal que haja um intervalo de loading entre a requisição e o recebimento da resposta;
+- Podemos fazer isso no nosso hook também;
+- Identificar quando começa e termina este estado;
+
+Primeiro iremos criar um novo state em useFetch chamado de loading e iniciaremos ele como false, pois não possui nada carregando.
+```
+const [loading, setLoading] = useState(false);
+```
+
+Agora precisamos colocar onde o loading começa e terminar, e com isso iremos colocar o loading no inicio da função fetchData, assim quando ela começar o loading será setado para true.
+```
+useEffect(() => {
+        const fetchData = async () => {
+
+            setLoading(true);
+
+            const res = await fetch(url);
+
+            const json = await res.json();
+
+            setData(json);
+        };
+
+        fetchData();
+    }, [url, callFetch]);
+```
+
+E após alterarmos o estado de setData, que é quando o dados foram obtidos, iremos alterar novamente o estado de loading para false. Por fim iremos retonar esse loading para que ele possa ser consumido por outros componentes.
+
+´´´
+useEffect(() => {
+  const fetchData = async () => {
+
+      setLoading(true);
+
+      const res = await fetch(url);
+
+      const json = await res.json();
+
+      setData(json);
+  };
+
+  fetchData();
+  setLoading(false);
+
+}, [url, callFetch]);
+
+return { data, httpConfig, loading };
+´´´
+
+Em App.js iremos importar o loading:
+```
+  const { data: items, httpConfig, loading } = useFetch(url);
+```
+
+Agora iremos chamar noso loading com uma validação se caso for true ele irá exibir "carregando dados" e quando o loading for false ele irá exibir a lista.
+```
+return (
+    <div className="App">
+      <h1>Lista de Produtos</h1>
+      {loading && <p>Carregando dados...</p>}
+      {!loading && (
+        <ul>
+          {items && items.map((product) => (
+            <li key={product.id}>
+              {product.name} - R$ {product.price}
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="add-products">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Nome:
+            <input 
+              type="text" 
+              value={name} 
+              name="name" 
+              onChange={(e)=> setName(e.target.value)} 
+            />
+          </label>
+          <label>
+            Preço:
+            <input 
+              type="text" 
+              value={price} 
+              name="price" 
+              onChange={(e)=> setPrice(e.target.value)} 
+            />
+          </label>
+          <input type="submit" value="criar" />
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+```
 
 <br> 
 
 ## ✅ Loading no POST
+- Podemos bloquear ações indevidas em outras requests também, como no POST;
+- Uma ação interessante é remover a ação de adicionar outro item enquanto o request ainda não finalizou;
+
+Podemos utilizar o loading para criar uma validação no envio, a fim de evitar duplos cliques no botão de envio, e com isso evitando o envio de itens em branco para o banco de dados, segue exemplo abaixo, onde envolvemos o input de envio com chaves e validamos com o state loading quando estiver em true ou false.
+```
+{loading && <input type="submit" disabled value="aguarde" />}
+{!loading && <input type="submit" value="criar" />}
+```
 
 <br> 
 
 ## ✅ Tratamento de erros
+- Podemos tratar os erros das requisições por meio de um try catch;
+- Além de pegar os dados do erro, também podemos alterar um state para imprimir um elemento se algo der errado;
+- Desta maneira conseguimos prever vários cenários(dados resgatados, carregamento e erro);
+
+Primeiro iremos criar um state para armazenar este erro:
+```
+const [error, setError] = useState(null);
+```
+
+Como exemplo utilizamos um bloco Try/catch dentro do nosso hook, que irá monitorar a busca pela url até o retorno dos dados
+```
+useEffect(() => {
+  const fetchData = async () => {
+
+      setLoading(true);
+
+      try {
+          const res = await fetch(url);
+
+          const json = await res.json();
+
+          setData(json);
+      } catch (error) {
+          setError("Houve algum erro ao carregar os dados")
+      }
+
+      setLoading(false);
+
+  };
+
+  fetchData();
+}, [url, callFetch]);
+```
+
+Com isso iremos dar o return nesse erro para ser utilizado em outros componentes.
+```
+return { data, httpConfig, loading, error };
+```
+
+E podemos inserir como mensagem esse erro conforme exemplo abaixo.
+```
+return (
+    <div className="App">
+      <h1>Lista de Produtos</h1>
+      {loading && <p>Carregando dados...</p>}
+      {error && <p>{error}</p>}
+      {!error && (
+        <ul>
+          {items && items.map((product) => (
+            <li key={product.id}>
+              {product.name} - R$ {product.price}
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="add-products">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Nome:
+            <input 
+              type="text" 
+              value={name} 
+              name="name" 
+              onChange={(e)=> setName(e.target.value)} 
+            />
+          </label>
+          <label>
+            Preço:
+            <input 
+              type="text" 
+              value={price} 
+              name="price" 
+              onChange={(e)=> setPrice(e.target.value)} 
+            />
+          </label>
+          {loading && <input type="submit" disabled value="aguarde" />}
+          {!loading && <input type="submit" value="criar" />}
+        </form>
+      </div>
+    </div>
+  );
+};
+```
