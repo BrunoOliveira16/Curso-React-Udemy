@@ -40,17 +40,90 @@
 <br>
 
 ## ✅ Criando a primeira API
+- Para criar a API teremos uma tarefa bem simples, comparada a estrutura com Handlebars;
+- Basta instalar o Express, ele fará tudo sozinho neste ponto;
+- Depois criaremos uma rota que responde em JSON, este é o dado de comunicação entre aplicação e API;
+- É importante definir o verbo correto, como GET ou POST, por ex;
 
+Para a criação de nossa API, primeiramente criaremos uma pasta chamada ```primeira_api``` e navegamos para a mesma pelo comando no terminal:
+```
+cd primeira_api
+```
+
+Depois utilizaremos o comando abaixo no terminal, para instalar algumas dependencias.
+```
+npm init -y
+```
+
+Após a criação do nosso arquivo ```package.json```, utilizaremos o comando abaixo para instalação do express:
+```
+npm install express nodemon
+```
+
+Após a instalação, criaremos um script para iniciar nossa API, no arquivo ```package.json```:
+```
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1",
+"start": "nodemon ./index.js localhost 3000"
+},
+```
+
+Agora iremos criar o arquivo index.js e utilizar o setup basico abaixo, para poder criar uma API:
+```
+const express = require('express')
+const app = express()
+
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+
+app.use(express.json())
+
+app.listen(3000)
+```
+
+Agora iremos criar nossa primeira rota, para teste.
+```
+const express = require('express')
+const app = express()
+
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+
+app.use(express.json())
+
+// rotas - endpoints
+app.get('/', (req, res) => {
+    res.json({message: 'Primeira rota criada com sucesso'})
+})
+
+app.listen(3000)
+```
+> para testar utilize o comando no terminal ```npm start``` e depois no navegador digite o endereço: http://localhost:3000/
 
 <br>
 
 ## ✅ Instalando o Postman
+- O Postman é um client para testes de API;
+- Podemos então criar o back-end antes ou separado do front só com a ajuda deste software;
+- Como você deve imaginar, é fundamental quando estamos criando APIs;
+- Podemos simular verbos, corpo de requisição, inserir headers, tudo que é possível com uma aplicação web;
+
+Link para dowload: https://www.postman.com/downloads/
 
 
 <br>
 
 ## ✅ Testando rota com o postman
-
+- Para acessar uma rota com o Postman precisamos configurar o client;
+- Devemos inserir o verbo correto para a rota;
+- E também configurar o endpoint, que é a URL onde nossa rota foi estabelecida;
+- Enviando a requisição, receberemos a resposta;
 
 <br>
 
