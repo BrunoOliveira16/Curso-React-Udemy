@@ -128,15 +128,94 @@ Link para dowload: https://www.postman.com/downloads/
 <br>
 
 ## ✅ Criando rota de POST
+- Para criar a rota de POST vamos utilizar o método post do Express;
+- Podemos extrair os dados da requisição, acessando req.body;
+- Da mesma maneira que no get, podemos retornar uma resposta como JSON pela API;
 
+Nesta etapa, iremos criar uma nova pasta chamada de ```rota_post``` e copiar os mesmos arquivos da pasta primeira_api, porém iremos inserir uma rota de POST e testar com o postman.
+```
+const express = require('express')
+const app = express()
+
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+
+app.use(express.json())
+
+app.post('/createproduct', (req, res) => {
+
+    const name = req.body.name
+    const price = req.body.price
+
+    console.log(name)
+    console.log(price)
+
+    res.json({message: `O produto ${name} foi criado com sucesso!`})
+})
+
+// rotas - endpoints
+app.get('/', (req, res) => {
+    res.json({message: 'Primeira rota criada com sucesso'})
+})
+
+app.listen(3000)
+```
 
 <br>
 
 ## ✅ Status na resposta
+- Os status podem ajudar no desenvolvimento da nossa aplicação;
+- Exibindo mensagens de sucesso ou erro, por exemplo;
+- Precisamos entre res e o método json definir um número de status HTTP;
+- Isso é feito por meio do método status;
 
+Link útil: https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status
+
+Exemplo criado na pasta ```status_na_resposta```
+```
+const express = require('express')
+const app = express()
+
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+
+app.use(express.json())
+
+app.post('/createproduct', (req, res) => {
+
+    const name = req.body.name
+    const price = req.body.price
+
+    if(!name) {
+        res.status(422).json({message: `O campo name é obrigatório!`})
+        return
+    }
+
+    console.log(name)
+    console.log(price)
+
+    res.status(201).json({message: `O produto ${name} foi criado com sucesso!`})
+})
+
+// rotas - endpoints
+app.get('/', (req, res) => {
+    res.status(200).json({message: 'Primeira rota criada com sucesso'})
+})
+
+app.listen(3000)
+```
 
 <br>
 
 ## ✅ A realidade sobre as APIs
-
+- A API é desenvolvida de forma muito semelhante a quando criamos projetos com Handlebars, por exemplo;
+- Temos algumas alterações leves, como: resposta apenas por JSON;
+- Mas isso acaba até simplificando as coisas, separando as responsabilidades;
+- Ou seja, reaproveitamos todo o conhecimento visto durante o curso;
 
