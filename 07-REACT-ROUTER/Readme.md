@@ -113,8 +113,45 @@ export default App;
 <br>
 
 ## ✅ Carregamento dinâmico de dados
+- Graças ao passo dado na aula passada o carregamento individual de um produto será fácil;
+- Vamos utilizar o id recebido para formar a nova URL;
+- E por fim podemos utilizar o hook useFetch para trazer o item;
+- Por fim faremos a validação e impressão do mesmo no JSX;
 
 
 <br>
 
-## ✅
+## ✅ Nested routes
+- As nested routes indicam URLs mais complexas, como: /products/:id/something;
+- Neste caso vamos precisar criar um componente que corresponde com o padrão indicado e também a URL em App.js;
+- Na nested route teremos o acesso ao parâmetro da URL também;
+
+<br>
+
+## ✅ Página 404
+- Podemos criar uma página 404 facilmente com o React Router;
+- Basta criarmos o componente da página;
+- E no App.js definir um path como *;
+- Desta maneira, qualquer rota que não exista cairá neste componente;
+
+<br>
+
+## ✅ Link ativo
+- Para ter fácil acesso a uma modificação para os links ativos vamos trocar o Link pelo NavLink;
+- Neste elemento temos acesso a um valor chamado isActive;
+- Ou seja, podemos ativar uma classe se a rota atual for a que está no atributo to;
+
+<br>
+
+## ✅ Search Params
+- Search Params é um recurso que permite obter o que vem na URL em forma de parâmetro, ex: produtos?q=camisa
+- Utilizamos o hook useSearchParams para obtê-los;
+- Com este recurso fica simples fazer uma funcionalidade de busca no sistema;
+
+<br>
+
+## ✅ Redirecionamento de URL
+- Podemos precisar de um redirecionamento de páginas eventualmente;
+- Exemplo: uma página antiga do sistema responde agora a uma nova URL;
+- Para isso vamos criar a rota com Route normalmente;
+- Mas em element vamos utilizar o componente Navigate com um to que vai para a rota correta;
