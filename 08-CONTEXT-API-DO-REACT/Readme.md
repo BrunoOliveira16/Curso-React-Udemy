@@ -32,15 +32,24 @@
 <br>
 
 ## ✅ Refatorando contexto para hook
-
+- Podemos criar um hook para utilizar o contexto, isso nos dá algumas vantagens;
+- Não precisamos importar o useContext em todos os lugares que vamos usar o contexto o hook;
+- Temos um espaço para fazer uma validação do contexto;
 
 <br>
 
 ## ✅ Criando um contexto mais completo
-
+- Contextos mais complexos podem ter variaçõesno comportamento;
+- Para isso vamos utilizar um hook chamado useReducer;
+- Que é como um useState, mas para controle de dados complexos;
+- No reducer teremos diferentes ações com um switch;
+- E na aplicação vamos consumir o estado atual do dado que está no reducer;
 
 <br>
 
 ## ✅ Alterando contexto mais compexo
-
+- Para alterar o contexto vamos utilizar uma função chamada dispatch;
+- Ela estará no reducer também;
+- E deve conter todas as informações necessárias para a alteração do valor do contexto;
+- Ou seja, o switch entra em ação e retorna um novo contexto;
 
