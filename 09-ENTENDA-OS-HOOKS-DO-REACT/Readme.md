@@ -12,3 +12,20 @@
 - Alterações de um state por evento de onChange;
 - Limpeza de inputs(Controlled Input);
 - Após preenchimento total do form, unir os states e fazer um envio dos dados para o back-end;
+
+<br>
+
+## ✅ useReducer
+- O useReducer tem a mesma função que o useState, ele gerencia valores;
+- Porém temos a possibilidade de executar uma função na hora da alteração do valor;
+- Então temos que o useReducer recebe um valor para gerenciar e uma função para alterar este valor;
+
+<br>
+
+## ✅ useReducer com actions
+- Se o useReducer fosse utilizado como no exemplo passado, não teria tanta diferença do useState;
+- Por isso o reducer geralmente contém operações mais complexas, utilizando a estrutura switch com actions;
+- Esta situação foi apresentada na seção de Context API;
+
+<br>
+
