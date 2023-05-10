@@ -70,3 +70,10 @@
 - O useRef pode ser utilizado como useState para gerenciar valores;
 - A diferença é que ele é um objeto, seu valor está na propriedade current;
 - Outra particularidade do useRef é que ele não re-renderiza o componente ao ser alterado, sendo interessante alguns casos;
+
+<br>
+
+## ✅ useRef e DOM
+- O useRef pode ser utilizado para selecionar elementos do JSX;
+- Com isso podemos fazer manipulação de DOM ou aplicar funções como a focus, que foca no input;
+- Este é um outro uso muito interessante para este hook;
