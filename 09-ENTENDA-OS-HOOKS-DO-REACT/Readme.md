@@ -55,3 +55,18 @@
 - Alguns efeitos precisam ter uma técnica de cleanup (limpeza) para garantir o seu funcionamento;
 - Não fazer isso pode gerar erros ou comportamentos indesejados;
 - Exemplo: um timeout que ao mudar de página pode continuar a ser executado, pela falta desta limpeza;
+
+<br>
+
+## ✅ useContext
+- O useContext é o hook utilizado para consumir um contexto, da Context API;
+- Vamos precisar criar o contexto e também o Provider;
+- Envolver os componentes que receberão os valores compartilhados;
+- E então fazer o uso do hook onde necessário;
+
+<br>
+
+## ✅ useRef
+- O useRef pode ser utilizado como useState para gerenciar valores;
+- A diferença é que ele é um objeto, seu valor está na propriedade current;
+- Outra particularidade do useRef é que ele não re-renderiza o componente ao ser alterado, sendo interessante alguns casos;
