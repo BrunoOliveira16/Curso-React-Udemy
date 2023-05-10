@@ -77,3 +77,11 @@
 - O useRef pode ser utilizado para selecionar elementos do JSX;
 - Com isso podemos fazer manipulação de DOM ou aplicar funções como a focus, que foca no input;
 - Este é um outro uso muito interessante para este hook;
+
+<br>
+
+## ✅ useCallback
+- O hook de useCallback pode ser utilizado para duas situações;
+- Ele basicamente memoriza uma função, fazendo ela NÃO ser reconstruída a cada renderização de um componente;
+- O primeiro caso é quando estamos prezando pela performance, então queremos que uma função muito complexa não seja reconstruída toda vez;
+- Já o segundo é quando o próprio React nos indica que uma função deveria estar contida em um useCallback, para evitar problemas de performance;
