@@ -109,3 +109,15 @@
 - Isso nos permite passar as referências, e torna o nosso exemplo viável;
 
 <br>
+
+## ✅ React Dev Tools
+- React Dev Tools é uma extensão para o navegador;
+- Nela conseguimos entender o que o React está gerando por meio do nosso código;
+- Conseguimos também verificar os states e outros parâmetros;
+
+<br>
+
+## ✅ useDebugValue
+- É um hook que é utilizado para debug;
+- Aconselhado para ser utilizado em custom hooks;
+- Adiciona uma área no React Dev Tools, ela estará no componente em que o hook é utilizado;
