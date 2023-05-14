@@ -92,3 +92,11 @@
 - O useMemo pode ser utilizado para garantir a referência de um objeto;
 - Fazendo com que algo possa ser atrelado a uma referência e não a um valor;
 - Com isso conseguimos condicionar useEffects a uma variável de maneira mais inteligente;
+
+<br>
+
+## ✅ useLayoutEffect
+- Muito parecido com o useEffect;
+- A grande diferença é que este hook roda antes de renderizar o componente;
+- Ou seja, o hook é síncrono, bloqueando o carregamento da página para o sucesso da sua funcionalidade;
+- A ideia é executar algo antes que o usuário veja a página;
