@@ -62,3 +62,27 @@ npx create-react-app <nome da pasta> --tempate typescript
 - O destructuring é um recurso de ES6, que permite separar um array ou objeto em várias variáveis;
 - Aplicamos esta técnica nas props, para não precisa repetir o nome do objeto sempre;
 - Podemos fazer desta maneira em TS também;
+
+<br>
+
+## ✅ useState com TypeScript
+- O useState é um hook muito utilizado em react;
+- Serve para consultar e alterar o estado de algum dado;
+- Atrelamos uma função set a um evento, como mudança de dado em input e alteramos o valor da variável base;
+- Podemos adaptar este recurso para TS também;
+
+<br>
+
+## ✅
+
+<br>
+
+## ✅
+
+<br>
+
+## ✅
+
+<br>
+
+## ✅
