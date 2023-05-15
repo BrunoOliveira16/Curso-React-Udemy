@@ -9,6 +9,11 @@ import Destructuring, { Category } from './components/Destructuring';
 
 // 6 - useState
 import State from './components/State';
+import { text } from 'stream/consumers';
+
+// 8 - type
+type textOrNull = string | null
+type fixed = "Isso" | "Olá" | "Aquilo";
 
 function App() {
   // 1 - variáveis
@@ -20,6 +25,14 @@ function App() {
   const userGreeting = (name: string): string => {
     return `Olá, ${name}!`
   };
+
+  // 8 - type
+  const myText: textOrNull = "tem algum texto aqui";
+  let mySecondtext: textOrNull = null;
+
+  mySecondtext = "Opa";
+
+  const testandoFixed: fixed = "Isso";
 
   return (
     <div className="App">
@@ -49,6 +62,9 @@ function App() {
         category={Category.N}
       />
       <State />
+      {myText && <p>Tem texto na variável</p>}
+      {mySecondtext && <p>Tem texto na variável</p>}
+      <p>Testando o texto type fixed: {testandoFixed}</p>
     </div>
   );
 };
