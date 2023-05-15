@@ -73,11 +73,17 @@ npx create-react-app <nome da pasta> --tempate typescript
 
 <br>
 
-## ✅
+## ✅ Enum
+- O Enum é uma forma interessante de formatar um objeto com chaves e valores;
+- Onde podemos utilizar como props;
+- Passando a chave pela prop, imprimimos o valor dela no componente;
 
 <br>
 
-## ✅
+## ✅ Types
+- Além das interfaces, podemos criar estruturas de tipos com o type;
+- Isso nos permite criar dados com tipos de dados fixos;
+- Ou até tipos customizados, como quando utilizamos o operador |
 
 <br>
 
