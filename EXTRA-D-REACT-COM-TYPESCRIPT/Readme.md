@@ -29,3 +29,14 @@ npx create-react-app <nome da pasta> --tempate typescript
 <br>
 
 ## ✅ Variáveis no React
+- Podemos criar variáveis dentro dos componentes;
+- E elas podem receber os tipos que já vimos até este momento do curso;
+- Isso nos permite trabalhar com JSX com apoio destas variáveis e seus tipos;
+
+<br>
+
+## ✅ Criação de funções em componentes
+- Podemos também criar funções em componentes;
+- Estas funções recebem parâmetros, que podemos ser tipados;
+- E o seu retorno também;
+- Ou seja, podemos aplicar os mesmos conceitos que já vimos de TS;
