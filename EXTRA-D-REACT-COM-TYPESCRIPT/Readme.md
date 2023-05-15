@@ -40,3 +40,25 @@ npx create-react-app <nome da pasta> --tempate typescript
 - Estas funções recebem parâmetros, que podemos ser tipados;
 - E o seu retorno também;
 - Ou seja, podemos aplicar os mesmos conceitos que já vimos de TS;
+
+<br>
+
+## ✅ Extensão para React com TS / Criando componente
+- A extensão que vamos utilizar é a Typescript React code snippets;
+- Ela nos ajuda com atalhos para programar mais rápido;
+- Como o ``tsrafce``, que cria um componente funcional;
+- Isso torna o nosso dia a dia mais simples;
+
+<br>
+
+## ✅ Importando componentes
+- A importação de componente funciona da mesma forma que sem TypeScript;
+- Porém temos que nos atentar aos valores e tipos das props de cada componente;
+- O TS interage de forma mais sucinta na parte da importação;
+
+<br>
+
+## ✅ Desestruturando props
+- O destructuring é um recurso de ES6, que permite separar um array ou objeto em várias variáveis;
+- Aplicamos esta técnica nas props, para não precisa repetir o nome do objeto sempre;
+- Podemos fazer desta maneira em TS também;
