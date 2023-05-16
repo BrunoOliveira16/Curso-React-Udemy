@@ -87,8 +87,15 @@ npx create-react-app <nome da pasta> --tempate typescript
 
 <br>
 
-## ✅
+## ✅ Context API
+- A Context API, é uma forma de transmitir dados entre componentes no React;
+- A ideia principal é que podemos determinar quais componentes recebem estes dados;
+- Ou seja, fazem parte do contexto;
+- Podemos aplicar TS a esta funcionalidade também;
 
 <br>
 
-## ✅
+## ✅ Consumindo o contexto
+- Para utilizar os dados do contexto vamos precisar de um hook;
+- Que é o useContext;
+- A partir dele conseguimos extrair os dados e utilizar em um componente;
